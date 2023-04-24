@@ -51,5 +51,74 @@ void mousePressed(){
     
  
 }
+//FONCTION D'ACTIVATION
+  int sign(float n) {
+  if (n >= 0){
+   return 1; 
+  } else {
+    return -1;
+  }
+}
+class Perceptron {
+ 
+  float[] poids = new float[2];
+  float lr = 0.1;
+
+ 
+//CONSTRUCTEUR
+Perceptron() {
+  // initialiser les poids de façon aléatoire
+   for (int i = 0; i < poids.length; i++) {
+     
+     poids[i] = random(-1,1);
+ } 
+}
+// fonction "guess"
+int guess(float[] inputs) {
+  float somme = 0;
+  for ( int i = 0; i < poids.length; i++) {
+   somme += inputs [i]*poids[i]; 
+  }
+  int output = sign(somme);
+  return output;
+}
+
+void train(float[] inputs, int target) {
+ int guess = guess(inputs);
+ int error =  target - guess;
+ 
+ for(int i = 0; i < poids.length; i++) {
+   poids[i] += error * inputs [i] * lr;
+   
+ }
+}
+}
+ class Point {
+   
+   float x;
+   float y;
+   int label;
+   
+   Point() {
+    x= random (width);
+    y= random (height);
+    if (x > y) {
+      label= 1;
+    } else{
+     label= -1; 
+    }   
+   }
+   
+   void show() {
+     stroke(0);
+     if (label == 1) {
+      fill(255); 
+     } else {
+      fill(0); 
+     }
+     ellipse(x,y,32,32);
+ }
+}
+ 
 
     
